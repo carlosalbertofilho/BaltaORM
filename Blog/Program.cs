@@ -9,3 +9,8 @@ context.Tags
     .ToList<Tag>()
     .ForEach(Console.WriteLine);
 
+var category = context.Categories
+    .AsNoTracking()
+    .FirstOrDefault<Category>(x => x.Id == 29);
+
+Console.WriteLine(category);
