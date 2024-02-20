@@ -1,13 +1,11 @@
 ﻿using Blog.Data;
 using Blog.Models;
+using Microsoft.EntityFrameworkCore;
 
 using var context = new BlogDataContext();
 
-context.Tags.Add(new Tag
-{
-    Name = "ASP.NET",
-    Slug = "aspnet"
-});
+context.Tags
+    .AsNoTracking()
+    .ToList<Tag>()
+    .ForEach(Console.WriteLine);
 
-
-context.SaveChanges();
