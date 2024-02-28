@@ -57,9 +57,11 @@ var category = new Category
 context.Posts
     .AsNoTracking()
     .Include(x => x.Author)
+    .Include(x => x.Category)   
     .OrderByDescending(x => x.LastUpdateDate)
     .ToList<Post>()
     .ForEach(post => 
-        Console.WriteLine($"Post: {post.Id}, " +
-        $" Titulo: {post.Title}, " +
-        $" Author: {post.Author.Name}."));
+        Console.WriteLine($"Post: {post.Id} - " +
+        $"Titulo: {post.Title} - " +
+        $"Autor:  {post.Author?.Name} - " +
+        $"Categoria: {post.Category?.Name}."));
