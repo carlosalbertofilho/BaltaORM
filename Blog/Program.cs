@@ -8,15 +8,58 @@ context.Tags
     .AsNoTracking()
     .ToList<Tag>()
     .ForEach(Console.WriteLine);
+Console.WriteLine("\n\n--------------------\n\n");
 
-context.Tags
+context.Users
+    .ToList<User>()
+    .ForEach(Console.WriteLine);
+Console.WriteLine("\n\n--------------------\n\n");
+
+context.Categories
     .AsNoTracking()
-    .Where(x => x.Name.Contains(".NET"))
-    .ToList<Tag>() // query é executada aqui
+    .ToList<Category>()
     .ForEach(Console.WriteLine);
 
-var category = context.Categories
-    .AsNoTracking()
-    .FirstOrDefault<Category>(x => x.Id == 3);
 
-Console.WriteLine(category.Name);
+Console.WriteLine("\n\n--------------------\n\n");
+
+var user = new User
+{
+    Name = "Carlos Filho"
+,   Slug = "carlosfilho"
+,   Email = "teste@teste.com"
+,   Bio = "Gordinho Gostoso"
+,   Image = "https://th.bing.com/th/id/OIP.PXR9dCXjmM05lCDevpJL4AAAAA?rs=1&pid=ImgDetMain"
+,   PasswordHash = "SenhaTabajara123"
+};
+
+var category = new Category
+{
+    Name = "Backend"
+,   Slug = "backend"
+};
+
+//var post = new Post
+//{
+//    Title = "Começando com EF"
+//,   Body = "Aprendendo EF e .NET"
+//,   Summary = "Aprendendo EF e .NET"
+//,   Slug = "comecando-com-ef"
+//,   Category = category
+//,   Author = user
+//,   CreateDate = DateTime.Now
+//,   LastUpdateDate = DateTime.Now
+//};
+
+//context.Posts.Add(post); // Cria user e Category por tabela
+//context.SaveChanges(); // Commit no banco
+
+context.Posts
+    .AsNoTracking()
+    .Include(x => x.Author)
+    .OrderByDescending(x => x.LastUpdateDate)
+    .ToList<Post>()
+    .ForEach(post => 
+        Console.WriteLine($"Post: {post.Id}, " +
+        $" Titulo: {post.Title}, " +
+        $" Author: {post.Author.Name}."));
