@@ -4,19 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog.Models
 {
-    [Table("Post")]
     public class Post
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
 
-        [ForeignKey("CategoryId")]
         public int CategoryId { get; set; }
         public required Category Category { get; set; }
 
-        [ForeignKey("AuthorId")]
         public int AuthorId { get; set; }
         public required User Author { get; set; }
 
