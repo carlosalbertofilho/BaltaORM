@@ -14,6 +14,9 @@ namespace Blog.Models
         public string Image { get; set; } = string.Empty;
         public string Slug { get; set; } = string.Empty;
 
+        public IList<Post> Posts { get; set; } = [];
+        public IList<Role> Roles { get; set; } = [];
+
         public override string ToString()
             => $"{this.Id} - {this.Name} - {this.Slug}";
     }

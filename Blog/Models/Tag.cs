@@ -9,6 +9,9 @@ namespace Blog.Models
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Slug { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; }
+
+        public IList<Post> Posts { get; set; } = [];
 
         public override string ToString()
             => $"{this.Id} - {this.Name} - {this.Slug}";
