@@ -11,8 +11,6 @@ namespace Blog.Models
         public string? Slug { get; set; }
 
         public override string ToString()
-        {
-            return $"{this.Id} - {this.Name} - {this.Slug}";
-        }
+            => $"{this.Id} - {this.Name} - {this.Slug}";
     }
 }
