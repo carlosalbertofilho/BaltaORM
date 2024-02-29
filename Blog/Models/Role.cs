@@ -7,18 +7,12 @@ namespace Blog.Models
 {
     public class Role
     {
-        [Key]
-        public int Id
-        {
-            get; set;
-        }
-        public string? Name
-        {
-            get; set;
-        }
-        public string? Slug
-        {
-            get; set;
-        }
+
+        public int Id { get; set;} 
+        public string Name { get; set; } = string.Empty;
+        public string Slug { get; set; } = string.Empty;
+
+        public override string ToString()
+            => $"{this.Id} - {this.Name} - {this.Slug}";
     }
 }
