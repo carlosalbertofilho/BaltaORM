@@ -65,3 +65,5 @@ context.Posts
         $"Titulo: {post.Title} - " +
         $"Autor:  {post.Author?.Name} - " +
         $"Categoria: {post.Category?.Name}."));
+
+//Fim do módulo 01
