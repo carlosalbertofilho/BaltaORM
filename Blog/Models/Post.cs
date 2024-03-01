@@ -12,8 +12,8 @@ namespace Blog.Models
         public string Body { get; set; } =  string.Empty;
         public string Slug { get; set; } = string.Empty;
         public string Image { get; set; } = string.Empty;
-        public DateTime CreateDate { get; set; }
-        public DateTime LastUpdateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? LastUpdateDate { get; set; }
 
 
         public required User Author { get; set; }

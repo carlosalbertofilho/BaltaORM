@@ -61,6 +61,26 @@ namespace Blog.Data.Mappings
                 .HasIndex(user => user.Email, "IX_User_Email")
                 .IsUnique();
 
+            // Mapeia o relacionamento muitos para muitos entre User e Role
+            // 1 User tem N Roles
+            // 1 Role tem N Users
+            builder.HasMany<Role>(user => user.Roles)
+                .WithMany(role => role.Users)
+                .UsingEntity<Dictionary<string, object>>(
+                    "UserRole"
+                ,   role => role
+                    .HasOne<Role>()
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .HasConstraintName("FK_UserRole_RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                ,   user => user
+                    .HasOne<User>()
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .HasConstraintName("FK_UserRole_UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                );
         }
     }
 }
