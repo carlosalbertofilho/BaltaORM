@@ -57,6 +57,26 @@ namespace Blog.Data.Mappings
                 .HasColumnName("Slug")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(200);
+
+            // Mapeia o relacionamento com a tabela de Usuário
+            // 1 Post tem 1 Autor
+            builder.HasOne<User>(post => post.Author)
+                .WithMany(user => user.Posts)
+                .HasConstraintName("FK_Post_Author")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Mapeia o relacionamento com a tabela de Categoria
+            // 1 Post tem 1 Categoria
+            builder.HasOne<Category>(post => post.Category)
+                .WithMany(category => category.Posts)
+                .HasConstraintName("FK_Post_Category")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Mapeia o relacionamento com a tabela de Tag
+            // 1 Post tem N Tags
+            builder.HasMany<Tag>(post => post.Tags)
+                .WithMany(tag => tag.Posts)
+                .UsingEntity(j => j.ToTable("PostTag"));
         }
     }
 }
