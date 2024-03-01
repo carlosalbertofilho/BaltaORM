@@ -60,6 +60,7 @@ namespace Blog.Data.Mappings
 
             // Mapeia o relacionamento com a tabela de Usuário
             // 1 Post tem 1 Autor
+            // 1 Autor tem N Posts
             builder.HasOne<User>(post => post.Author)
                 .WithMany(user => user.Posts)
                 .HasConstraintName("FK_Post_Author")
@@ -67,6 +68,7 @@ namespace Blog.Data.Mappings
 
             // Mapeia o relacionamento com a tabela de Categoria
             // 1 Post tem 1 Categoria
+            // 1 Categoria tem N Posts
             builder.HasOne<Category>(post => post.Category)
                 .WithMany(category => category.Posts)
                 .HasConstraintName("FK_Post_Category")
