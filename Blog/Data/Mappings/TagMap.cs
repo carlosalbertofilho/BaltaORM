@@ -33,7 +33,8 @@ namespace Blog.Data.Mappings
             builder.Property(tag => tag.CreatedAt)
                 .IsRequired()
                 .HasColumnName("CreatedAt")
-                .HasColumnType("DATETIME");
+                .HasColumnType("DATETIME")
+                .HasDefaultValue(DateTime.Now.ToUniversalTime());
 
             builder
                 .HasIndex(tag => tag.Slug, "IX_Tag_Slug")

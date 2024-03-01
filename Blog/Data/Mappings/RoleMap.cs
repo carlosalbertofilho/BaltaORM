@@ -32,7 +32,8 @@ namespace Blog.Data.Mappings
             builder.Property(role => role.CreatedAt)
                 .IsRequired()
                 .HasColumnName("CreatedAt")
-                .HasColumnType("DATETIME");
+                .HasColumnType("DATETIME")
+                .HasDefaultValue(DateTime.Now.ToUniversalTime());
 
             builder
                 .HasIndex(role => role.Slug, "IX_Role_Slug")

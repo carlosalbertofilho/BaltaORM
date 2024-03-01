@@ -43,12 +43,14 @@ namespace Blog.Data.Mappings
             builder.Property(post => post.CreateDate)
                 .IsRequired()
                 .HasColumnName("CreateDate")
-                .HasColumnType("DATETIME");
+                .HasColumnType("DATETIME")
+                .HasDefaultValue(DateTime.Now.ToUniversalTime());
 
             builder.Property(post => post.LastUpdateDate)
                 .IsRequired()
                 .HasColumnName("LastUpdateDate")
-                .HasColumnType("DATETIME");
+                .HasColumnType("DATETIME")
+                .HasDefaultValue(DateTime.Now.ToUniversalTime());
 
             builder.Property(post => post.Slug)
                 .IsRequired()
