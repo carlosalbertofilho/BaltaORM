@@ -76,9 +76,22 @@ namespace Blog.Data.Mappings
 
             // Mapeia o relacionamento com a tabela de Tag
             // 1 Post tem N Tags
+            // 1 Tag tem N Posts
             builder.HasMany<Tag>(post => post.Tags)
                 .WithMany(tag => tag.Posts)
-                .UsingEntity(j => j.ToTable("PostTag"));
+                .UsingEntity<Dictionary<string, object>>(
+                    "PostTag"
+                ,    post => post.HasOne<Tag>()
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .HasConstraintName("FK_PostTag_Post")
+                        .OnDelete(DeleteBehavior.Cascade)
+                ,    tag => tag.HasOne<Post>()
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .HasConstraintName("FK_PostTag_Tag")
+                        .OnDelete(DeleteBehavior.Cascade)
+                );
         }
     }
 }
